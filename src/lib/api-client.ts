@@ -1,3 +1,4 @@
+import { getApiOrigin } from "@/src/lib/api-config";
 import type {
   ApiErrorBody,
   ApiRequest,
@@ -10,7 +11,6 @@ import type {
   TransportResult,
 } from "@/src/types/api";
 
-const API_ORIGIN = process.env.NEXT_PUBLIC_API_URL;
 const BROWSER_REFRESH_KEY = "chatter.refresh-token";
 const DEFAULT_PREFERENCES: LocalPreferences = {
   accent: "purple",
@@ -82,14 +82,7 @@ function notifyExpiredSession(request: ApiRequest, status?: number) {
 }
 
 function apiOrigin(): string {
-  if (!API_ORIGIN) {
-    throw new ApiError(
-      500,
-      "configuration_error",
-      "NEXT_PUBLIC_API_URL is not configured.",
-    );
-  }
-  return API_ORIGIN;
+  return getApiOrigin();
 }
 
 /** Resolve backend-relative asset paths like `/uploads/ai-images/...`. */

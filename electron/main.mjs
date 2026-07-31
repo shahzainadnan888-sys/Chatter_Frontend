@@ -28,7 +28,11 @@ function loadEnvironment() {
 
 loadEnvironment();
 
-const API_ORIGIN = process.env.CHATTER_API_URL || process.env.NEXT_PUBLIC_API_URL;
+const PRODUCTION_API_ORIGIN = "https://chatter-backend.fastapicloud.dev";
+const API_ORIGIN =
+  process.env.CHATTER_API_URL ||
+  process.env.NEXT_PUBLIC_API_URL ||
+  PRODUCTION_API_ORIGIN;
 const API_PREFIX = process.env.NEXT_PUBLIC_API_PREFIX || "/api/v1";
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const GROQ_CHAT_MODEL =
@@ -267,13 +271,6 @@ async function rotateRefreshToken() {
 }
 
 async function performRequest(request, replay = true) {
-  if (!API_ORIGIN) {
-    throw {
-      status: 500,
-      code: "configuration_error",
-      message: "NEXT_PUBLIC_API_URL is not configured.",
-    };
-  }
   const method = request.method || "GET";
   if (!isAllowedOperation(request.path, method)) {
     throw {

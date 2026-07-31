@@ -4,8 +4,8 @@
   "private": true,
   "main": "electron/main.mjs",
   "scripts": {
-    "dev": "concurrently -k \"npm:dev:web\" \"wait-on http://127.0.0.1:3000 && env -u ELECTRON_RUN_AS_NODE electron .\"",
-    "dev:web": "concurrently -k -n WEB,AI \"next dev --hostname 127.0.0.1\" \"node electron/ai-dev-proxy.mjs\"",
+    "dev": "concurrently -k \"npm:dev:web\" \"wait-on http://localhost:3000 && env -u ELECTRON_RUN_AS_NODE electron .\"",
+    "dev:web": "concurrently -k -n WEB,AI \"next dev --hostname localhost\" \"node electron/ai-dev-proxy.mjs\"",
     "build": "next build",
     "start": "next dev",
     "lint": "eslint",

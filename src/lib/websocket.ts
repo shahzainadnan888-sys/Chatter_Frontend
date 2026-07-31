@@ -1,7 +1,8 @@
 import { getAccessToken } from "@/src/lib/api-client";
+import { getWsBase } from "@/src/lib/api-config";
 import type { UUID, WsEvent } from "@/src/types/api";
 
-const WS_BASE = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:8000/ws";
+const WS_BASE = getWsBase();
 const PONG_TIMEOUT_MS = 45_000;
 
 type Listener = (event: WsEvent) => void;

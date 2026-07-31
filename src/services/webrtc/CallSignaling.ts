@@ -1,6 +1,7 @@
 "use client";
 
 import { getAccessToken } from "@/src/lib/api-client";
+import { getWsBase } from "@/src/lib/api-config";
 import { callDebug, callWarn } from "@/src/services/webrtc/call-debug";
 import type {
   SignalingEvent,
@@ -11,7 +12,7 @@ import type {
 type Listener = (event: SignalingEvent) => void;
 type StatusListener = (status: "connecting" | "open" | "closed" | "error") => void;
 
-const WS_BASE = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:8000/ws";
+const WS_BASE = getWsBase();
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
